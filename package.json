@@ -15,7 +15,10 @@
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives"
   },
   "dependencies": {
-    "astro": "6.2.1"
+    "@tailwindcss/vite": "4.2.4",
+    "astro": "6.2.1",
+    "daisyui": "5.5.19",
+    "tailwindcss": "4.2.4"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
