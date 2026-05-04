@@ -9,6 +9,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
+  site: "https://nekko1119.github.io",
+  base: "/mysite",
   integrations: [icon()],
 });
