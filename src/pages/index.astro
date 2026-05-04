@@ -32,8 +32,16 @@ import { Icon } from "astro-icon/components";
             </ProfileRow>
           </dl>
         </div>
-        <a role="button" href="/tech" class="btn btn-primary">技術について</a>
-        <a role="button" href="/hobby" class="btn btn-primary">趣味について</a>
+        <a
+          role="button"
+          href={new URL("tech", Astro.url).pathname}
+          class="btn btn-primary">技術について</a
+        >
+        <a
+          role="button"
+          href={new URL("hobby", Astro.url).pathname}
+          class="btn btn-primary">趣味について</a
+        >
       </div>
     </div>
   </div>
