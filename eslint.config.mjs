@@ -7,9 +7,13 @@ import eslintPluginAstro from "eslint-plugin-astro";
 
 export default defineConfig([
   js.configs.recommended,
-  tseslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
   ...eslintPluginAstro.configs.recommended,
   {
-    rules: {},
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+      }
+    }
   },
 ]);

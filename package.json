@@ -15,8 +15,10 @@
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives"
   },
   "dependencies": {
+    "@iconify-json/lucide": "1.2.105",
     "@tailwindcss/vite": "4.2.4",
     "astro": "6.2.1",
+    "astro-icon": "1.1.5",
     "daisyui": "5.5.19",
     "tailwindcss": "4.2.4"
   },

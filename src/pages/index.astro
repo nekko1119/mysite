@@ -1,20 +1,40 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IconImage from "../assets/icon.png";
+import { Image } from "astro:assets";
+import ProfileRow from "../components/ProfileRow.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<Layout>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="icon" href="/favicon.ico" />
-      <meta name="viewport" content="width=device-width" />
-      <meta name="generator" content={Astro.generator} />
-      <title>Astro</title>
-    </head>
-    <body>
-      <h1 class="text-4xl font-bold">Astro</h1>
-      <button class="btn btn-primary">button</button>
-    </body>
-  </html>
-</Layout>
+<BaseLayout>
+  <div class="hero bg-base-200 min-h-screen">
+    <div class="hero-content gap-16 flex-col lg:flex-row">
+      <Image src={IconImage} alt="" class="max-w-48 rounded-4 shadow-2xl" />
+      <div>
+        <h1 class="text-5xl font-bold">nekko1119</h1>
+        <div class="py-6">
+          <dl class="grid gap-y-2">
+            <ProfileRow label="名前" value="根っこ" />
+            <div class="grid grid-cols-[6rem_1fr] items-start">
+              <dt class="font-semibold after:content-[':'] after:ml-1">出身</dt>
+              <dd>茨城県</dd>
+            </div>
+            <ProfileRow label="アイコン">
+              <div class="min-w-0">
+                「百花繚乱」様よりお借りしています <a
+                  href="https://flowerillust.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link-primary inline-flex items-center gap-1"
+                  >リンク<Icon name="lucide:external-link" /></a
+                >
+              </div>
+            </ProfileRow>
+          </dl>
+        </div>
+        <a role="button" href="/tech" class="btn btn-primary">技術について</a>
+        <a role="button" href="/hobby" class="btn btn-primary">趣味について</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
