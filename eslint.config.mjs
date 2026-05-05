@@ -2,26 +2,45 @@
 
 import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
-import tseslint from "typescript-eslint";
 import eslintPluginAstro from "eslint-plugin-astro";
 import astroParser from "astro-eslint-parser";
-import typescriptEslintParser from "@typescript-eslint/parser";
+import typescriptParser from "@typescript-eslint/parser";
+import eslintConfigPrettier from "eslint-config-prettier";
+import tseslint from "typescript-eslint";
 
 export default defineConfig([
   {
-    ignores: [".astro/", "dist/", "node_modules/"],
+    ignores: [
+      ".astro/",
+      ".github/",
+      ".husky",
+      ".vscode/",
+      "dist/",
+      "node_modules/",
+      "public/",
+    ],
   },
   js.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...eslintPluginAstro.configs.recommended,
+  eslintPluginAstro.configs.recommended,
+  eslintPluginAstro.configs["jsx-a11y-recommended"],
+  tseslint.configs.recommendedTypeChecked,
   {
-    files: ["*.astro"],
     languageOptions: {
-      parser: astroParser,
       parserOptions: {
-        parser: typescriptEslintParser,
-        extraFileExtensions: [".astro"],
+        project: true,
       },
     },
   },
+  {
+    files: ["**/*.astro"],
+    languageOptions: {
+      parser: astroParser,
+      parserOptions: {
+        parser: typescriptParser,
+        extraFileExtensions: [".astro"],
+        project: "./tsconfig.json",
+      },
+    },
+  },
+  eslintConfigPrettier,
 ]);

@@ -9,7 +9,12 @@ import { Icon } from "astro-icon/components";
 <BaseLayout>
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content gap-16 flex-col lg:flex-row">
-      <Image src={IconImage} alt="" class="max-w-48 rounded-4 shadow-2xl" />
+      <Image
+        src={// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- アプリ側の問題ではなく対処できることがない
+        IconImage}
+        alt=""
+        class="max-w-48 rounded-4 shadow-2xl"
+      />
       <div>
         <h1 class="text-5xl font-bold">nekko1119</h1>
         <div class="py-6">
