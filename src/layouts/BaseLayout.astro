@@ -23,7 +23,9 @@ const { isContent = false } = Astro.props;
     <ClientRouter />
   </head>
   <body transition:animate="slide" class="py-4">
-    <main class={isContent ? "mx-auto w-full max-w-2xl px-4 2xl:px-0" : ""}>
+    <main
+      class={isContent ? "mx-auto w-full max-w-2xl px-4 2xl:px-0" : undefined}
+    >
       {
         isContent && (
           <a
