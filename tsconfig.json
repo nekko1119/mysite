@@ -4,7 +4,10 @@
   "exclude": ["dist", "node_modules", ".astro", ".github", ".husky", ".vscode"],
   "compilerOptions": {
     "paths": {
-      "@*": ["./src/*"]
+      // "@*": ["./src/*"] と書くと、 @vite/env なども巻き込まれてしまうので個別に書く
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   }
 }

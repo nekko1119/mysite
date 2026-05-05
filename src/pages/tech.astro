@@ -1,52 +1,58 @@
 ---
 import DescriptionRow from "@components/DescriptionRow.astro";
+import Heading from "@components/Heading.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout isContent>
-  <h1 class="text-4xl my-2">Web</h1>
-  <div class="grid gap-4">
-    <dl>
-      <DescriptionRow
-        term="TypeScript"
-        description="1.5から使い続けている。型は厳格にしたい。型プログラミングも面白い"
-      />
-    </dl>
-    <dl>
-      <DescriptionRow
-        term="React"
-        description="10年以上使用経験。hocksによる状態管理や副作用、大きめのSPA開発経験あり"
-      />
-    </dl>
-  </div>
-  <h2 class="text-2xl p-2">過去</h2>
+  <Heading level="1">Web</Heading>
+  <dl class="grid gap-4 mb-8">
+    <DescriptionRow
+      term="TypeScript"
+      description="1.5から使い続けている。静的な型が好き。型プログラミングも面白い"
+    />
+    <DescriptionRow
+      term="React"
+      description="10年以上使用経験。hocksによる状態管理や副作用、大きめのSPA開発経験あり"
+    />
+    <DescriptionRow
+      term="Tanstack Query"
+      description="useQueryによる取得、useMutationによる副作用、invalidateQueriesによるキャッシュクリアなど"
+    />
+    <DescriptionRow
+      term="Vitest"
+      description="testing-libraryを組み合わせたテスト、Storybookを組み合わせたVRTも便利"
+    />
+  </dl>
+  <Heading level="2">その他</Heading>
   <ul class="list-disc list-inside pb-4">
+    <li>Jest</li>
+    <li>ESlint</li>
+    <li>Prettier</li>
+    <li>lint-staged</li>
     <li>Webpack</li>
     <li>styled-components</li>
     <li>Redux</li>
-    <li>redux-observable</li>
     <li>RxJS</li>
-    <li>css-modules</li>
   </ul>
-  <h1 class="text-4xl my-2">その他</h1>
+  <Heading level="1">趣味</Heading>
   <div class="grid gap-4">
     <dl>
       <DescriptionRow
         term="C++"
-        description="たくさん書籍を読み、テンプレートメタプログラミングなども少し触る。現在は最新規格のキャッチアップなど"
+        description="昔たくさん書籍を読んだ。テンプレートメタプログラミングなども少し経験。現在は最新規格のキャッチアップなど"
       />
     </dl>
     <dl>
       <DescriptionRow
-        term="Boost"
-        description="C++03,11時代は良く使ったけど、現在はほぼ使ってない"
+        term="DirectX9"
+        description="ゲームを作ろうとして。DirectX12を学習したいと思ってまだできていない"
       />
     </dl>
+    <Heading level="2">その他</Heading>
     <ul class="list-disc list-inside pb-4">
-      <li>C++</li>
       <li>Boost</li>
       <li>WinAPI</li>
-      <li>DirectX9</li>
       <li>DxLib</li>
       <li>C</li>
       <li>C#</li>

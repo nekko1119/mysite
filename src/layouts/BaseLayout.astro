@@ -1,6 +1,7 @@
 ---
 import "@styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   isContent?: boolean;
@@ -18,7 +19,21 @@ const { isContent = false } = Astro.props;
     <ClientRouter />
   </head>
   <body transition:animate="slide" class="py-4">
-    <main class={isContent ? "mx-auto w-full max-w-sm px-4 sm:px-0" : ""}>
+    <main class={isContent ? "mx-auto w-full max-w-2xl px-4 2xl:px-0" : ""}>
+      {
+        isContent && (
+          <a
+            href={
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access  -- 型がついているのに型が認識できてなさそう
+              import.meta.env.BASE_URL
+            }
+            class="link link-primary inline-flex items-center"
+          >
+            <Icon name="lucide:arrow-left" />
+            戻る
+          </a>
+        )
+      }
       <slot />
     </main>
   </body>
