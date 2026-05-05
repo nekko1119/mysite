@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import IconImage from "../assets/icon.png";
 import { Image } from "astro:assets";
-import ProfileRow from "../components/ProfileRow.astro";
+import DescriptionRow from "@components/DescriptionRow.astro";
 import { Icon } from "astro-icon/components";
 ---
 
@@ -14,12 +14,9 @@ import { Icon } from "astro-icon/components";
         <h1 class="text-5xl font-bold">nekko1119</h1>
         <div class="py-6">
           <dl class="grid gap-y-2">
-            <ProfileRow label="名前" value="根っこ" />
-            <div class="grid grid-cols-[6rem_1fr] items-start">
-              <dt class="font-semibold after:content-[':'] after:ml-1">出身</dt>
-              <dd>茨城県</dd>
-            </div>
-            <ProfileRow label="アイコン">
+            <DescriptionRow term="名前" description="根っこ" />
+            <DescriptionRow term="出身" description="茨城県" />
+            <DescriptionRow term="アイコン">
               <div class="min-w-0">
                 「百花繚乱」様よりお借りしています <a
                   href="https://flowerillust.com/"
@@ -29,19 +26,21 @@ import { Icon } from "astro-icon/components";
                   >リンク<Icon name="lucide:external-link" /></a
                 >
               </div>
-            </ProfileRow>
+            </DescriptionRow>
           </dl>
         </div>
-        <a
-          role="button"
-          href={new URL("tech", Astro.url).pathname}
-          class="btn btn-primary">技術について</a
-        >
-        <a
-          role="button"
-          href={new URL("hobby", Astro.url).pathname}
-          class="btn btn-primary">趣味について</a
-        >
+        <div class="flex flex-col sm:flex-row gap-4 items-start">
+          <a
+            role="button"
+            href={new URL("tech", Astro.url).pathname}
+            class="btn btn-primary">技術について</a
+          >
+          <a
+            role="button"
+            href={new URL("hobby", Astro.url).pathname}
+            class="btn btn-primary">趣味について</a
+          >
+        </div>
       </div>
     </div>
   </div>

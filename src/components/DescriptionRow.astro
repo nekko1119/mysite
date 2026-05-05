@@ -1,0 +1,14 @@
+---
+interface Props {
+  term: string;
+  description?: string;
+}
+
+const { term, description } = Astro.props as Props;
+const hasSlots = Astro.slots.has("default");
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-y-1 sm:gap-y-0 items-start">
+  <dt class="font-semibold">{term}</dt>
+  <dd class="ml-4 sm:ml-0">{hasSlots ? <slot /> : description}</dd>
+</div>

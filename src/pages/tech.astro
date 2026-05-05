@@ -1,21 +1,36 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import DescriptionRow from "@components/DescriptionRow.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout isContent>
-  <h1 class="text-4xl p-2">Web</h1>
-  <ul class="list-disc list-inside pb-4">
-    <li>TypeScript</li>
-    <li>React</li>
-    <li>Vite</li>
-    <li>Vitest</li>
-    <li>Storybook</li>
-    <li>ESlint</li>
-    <li>Prettier</li>
-    <li>Node.js</li>
-    <li>hono.js</li>
-  </ul>
-  <h2 class="text-2xl p-2">以前</h2>
+  <h1 class="text-4xl my-2">Web</h1>
+  <div class="grid gap-4">
+    <dl class="grid gap-4">
+      <DescriptionRow
+        term="TypeScript"
+        description="1.5から使い続けている。型は厳格に。型プログラミングも楽しい"
+      />
+    </dl>
+    <dl class="grid gap-4">
+      <DescriptionRow
+        term="React"
+        description="10年以上使用経験。hocksによる状態管理や副作用、大きめのSPA開発経験あり"
+      />
+    </dl>
+    <ul class="list-disc list-inside pb-4">
+      <li>TypeScript</li>
+      <li>React</li>
+      <li>Vite</li>
+      <li>Vitest</li>
+      <li>Storybook</li>
+      <li>ESlint</li>
+      <li>Prettier</li>
+      <li>Node.js</li>
+      <li>hono.js</li>
+    </ul>
+  </div>
+  <h2 class="text-2xl p-2">過去</h2>
   <ul class="list-disc list-inside pb-4">
     <li>Webpack</li>
     <li>styled-components</li>
@@ -24,7 +39,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <li>RxJS</li>
     <li>css-modules</li>
   </ul>
-  <h1 class="text-4xl p-2">他</h1>
+  <h1 class="text-4xl my-2">他</h1>
   <ul class="list-disc list-inside pb-4">
     <li>C++</li>
     <li>Boost</li>
