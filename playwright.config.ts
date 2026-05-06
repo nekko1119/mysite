@@ -70,13 +70,13 @@ export default defineConfig({
   webServer: {
     command: "E2E=true pnpm dev",
     url: "http://localhost:4321",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
   },
+  snapshotPathTemplate: "{testDir}/__screenshots__/{arg}-{projectName}{ext}",
   expect: {
     toHaveScreenshot: {
       animations: "disabled",
-      maxDiffPixelRatio: 0.02,
-      threshold: 0.2,
+      maxDiffPixelRatio: 0.001,
     },
   },
 });
