@@ -7,6 +7,7 @@ import astroParser from "astro-eslint-parser";
 import typescriptParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
+import globals from "globals";
 
 export default defineConfig([
   {
@@ -39,6 +40,14 @@ export default defineConfig([
         parser: typescriptParser,
         extraFileExtensions: [".astro"],
         project: "./tsconfig.json",
+      },
+    },
+  },
+  {
+    files: ["astro.config.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
       },
     },
   },
