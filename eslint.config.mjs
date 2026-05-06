@@ -44,7 +44,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["astro.config.mjs"],
+    files: ["astro.config.mjs", "playwright.config.ts"],
     languageOptions: {
       globals: {
         ...globals.node,
