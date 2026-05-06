@@ -14,17 +14,20 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
     "prepare": "husky",
+    "type-check": "astro check",
     "test": "playwright test",
     "test:update": "playwright test --update-snapshots"
   },
   "dependencies": {
+    "@astrojs/check": "0.9.9",
     "@iconify-json/lucide": "1.2.105",
     "@tailwindcss/vite": "4.2.4",
     "astro": "6.2.2",
     "astro-icon": "1.1.5",
     "daisyui": "5.5.19",
     "sharp": "0.34.5",
-    "tailwindcss": "4.2.4"
+    "tailwindcss": "4.2.4",
+    "typescript": "6.0.3"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
