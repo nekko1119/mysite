@@ -4,8 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    # リリースされてから1週間待つ
+    cooldown:
+      default-days: 7
     groups:
       all-non-major-updates:
         update-types:
           - "patch"
           - "minor"
+    # 最大5つまで
+    open-pull-requests-limit: 5
