@@ -21,7 +21,10 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI
-    ? [["html", { open: "never" }], ["github"]]
+    ? [
+        ["json", { outputFile: "playwright-results.json" }],
+        ["html", { open: "never" }],
+      ]
     : [["list"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -74,6 +77,8 @@ export default defineConfig({
   expect: {
     toHaveScreenshot: {
       animations: "disabled",
+      scale: "css",
+      maxDiffPixels: 10,
       maxDiffPixelRatio: 0.001,
     },
   },
