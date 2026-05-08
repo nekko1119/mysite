@@ -1,1 +1,3 @@
 minimumReleseAge: 10080 # 1週間
+allowBuilds:
+  "@actions/github-script": true
