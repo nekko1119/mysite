@@ -57,23 +57,25 @@ function formatResultToTable({
   interrupted,
 }) {
   const table = `
-|  Item   |   Count    |
-|-------- |-----------:|
-| Total   | ${total}   |
-| Passed  | ${passed}  |
-| Failed  | ${failed}  |
-| Skipped | ${skipped} |
+| Item        | Count          |
+|-------------|---------------:|
+| Total       | ${total}       |
+| Passed      | ${passed}      |
+| Failed      | ${failed}      |
+| Timedout    | ${timedOut}    |
+| Skipped     | ${skipped}     |
+| Interrupted | ${interrupted} |
 `;
 
   const allPassed =
     total !== 0 && failed === 0 && timedOut === 0 && interrupted === 0;
 
-  const descrption = allPassed
+  const description = allPassed
     ? "✨️✨️ VRTの差分はありません ✨️✨️"
     : "VRTの差分がありました。意図した差分かどうか確認してください";
 
   const text = `
-${descrption}
+${description}
 
 ${table}
 `;
