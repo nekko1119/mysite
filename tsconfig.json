@@ -1,7 +1,15 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules", ".astro", ".github", ".husky", ".vscode"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    ".astro",
+    ".github",
+    ".husky",
+    ".vscode",
+    "scripts"
+  ],
   "compilerOptions": {
     "paths": {
       // "@*": ["./src/*"] と書くと、 @vite/env なども巻き込まれてしまうので個別に書く

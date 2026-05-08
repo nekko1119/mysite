@@ -61,6 +61,8 @@ jobs:
 
       - name: Comment PR
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        env:
+          VRT_REPORT_PATH: ${{ github.workspace}}/playwright-results.json
         with:
           script: |
             const script = await import('${{ github.workspace }}/scripts/vrt-comment-pr.js');
