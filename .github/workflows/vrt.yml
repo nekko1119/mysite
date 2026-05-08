@@ -63,5 +63,5 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
-            const script = import('${{ github.workspace }}/scripts/vrt-comment-pr.js');
-            await script({ github, core, context });
+            const script = await import('${{ github.workspace }}/scripts/vrt-comment-pr.js');
+            await script.default({ github, core, context });
