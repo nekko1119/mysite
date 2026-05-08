@@ -3,12 +3,12 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 
 /**
- * @import { JSONReport, TestStatus } from '@playwright/test/reporter';
+ * @import { JSONReport } from '@playwright/test/reporter';
  */
 
 /**
  * @param {{ reportPath: string }} param0
- * @return {Promise<Record<TestStatus | "total", number>>}
+ * @return {Promise<JSONReport["stats"]>}
  */
 async function aggregateTestResultsFromReportJson({ reportPath }) {
   if (!existsSync(reportPath)) {
@@ -18,57 +18,25 @@ async function aggregateTestResultsFromReportJson({ reportPath }) {
 
   /** @type {JSONReport} */
   const report = JSON.parse(reportJson);
-
-  /** @type {Record<TestStatus | "total", number>} */
-  const result = {
-    total: 0,
-    passed: 0,
-    failed: 0,
-    timedOut: 0,
-    skipped: 0,
-    interrupted: 0,
-  };
-
-  report.suites.forEach((suite) => {
-    suite.specs.forEach((spec) => {
-      spec.tests.forEach((test) => {
-        test.results.forEach((r) => {
-          if (r.status !== undefined) {
-            result.total++;
-            result[r.status]++;
-          }
-        });
-      });
-    });
-  });
-  return result;
+  return report.stats;
 }
 
 /**
- * @param {Record<TestStatus | "total", number>} result
+ * @param {JSONReport["stats"]} result
  * @return {string}
  */
-function formatResultToTable({
-  total,
-  passed,
-  failed,
-  timedOut,
-  skipped,
-  interrupted,
-}) {
+function formatResultToTable(result) {
+  const { startTime, duration, expected, unexpected, flaky, skipped } = result;
   const table = `
-| Item        | Count          |
-|-------------|---------------:|
-| Total       | ${total}       |
-| Passed      | ${passed}      |
-| Failed      | ${failed}      |
-| Timedout    | ${timedOut}    |
-| Skipped     | ${skipped}     |
-| Interrupted | ${interrupted} |
+| Item       | Count         |
+|------------|--------------:|
+| Expected   | ${expected}   |
+| Unexpected | ${unexpected} |
+| Flaky      | ${flaky}      |
+| Skipped    | ${skipped}    |
 `;
 
-  const allPassed =
-    total !== 0 && failed === 0 && timedOut === 0 && interrupted === 0;
+  const allPassed = expected !== 0 && unexpected === 0 && flaky === 0;
 
   const description = allPassed
     ? "✨️✨️ VRTの差分はありません ✨️✨️"
@@ -82,8 +50,9 @@ ${table}
   return text;
 }
 
-/** @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments */
-export default async ({ github, core, context }) => {
+/** @param {import('@actions/github-script').AsyncFunctionArguments} args */
+export default async (args) => {
+  const { github, core, context } = args;
   const markerComment = "<!-- playwright-vrt-comment -->";
   const { owner, repo } = context.repo;
 
