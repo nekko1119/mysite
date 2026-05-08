@@ -2,17 +2,21 @@
 
 /** @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments */
 export default async ({ github, core, context }) => {
+  const { owner, repo } = context.repo;
+
   const body = `
 ## VRT Results
 
-Artifact](https://github.com/${github.repository}/actions/runs/${github.run_id})
+[Artifact](https://github.com/${owner}/${repo}/actions/runs/${context.runId})
 
 <!-- playwright-vrt-comment -->
 `;
 
-  const { owner, repo } = context.repo;
   const issueNumber = context.issue.number;
 
+  // listComments は最大30件の取得のため、コメントが多いPRではVRTコメントが取得できない可能性がある
+  // その場合はページネーションAPIを使うこと
+  // see https://github.com/nekko1119/mysite/pull/22#discussion_r3208683505
   const comments = github.rest.issues.listComments({
     owner,
     repo,
