@@ -37,10 +37,13 @@ function formatResultToTable(result) {
 `;
 
   const allPassed = expected !== 0 && unexpected === 0 && flaky === 0;
+  const noTests = expected === 0 && unexpected === 0 && flaky === 0;
 
   const description = allPassed
     ? "✨️✨️ VRTの差分はありません ✨️✨️"
-    : "VRTの差分がありました。意図した差分かどうか確認してください";
+    : noTests
+      ? "実行されたテストがありませんでした"
+      : "VRTの差分がありました。意図した差分かどうか確認してください";
 
   const text = `
 ${description}
