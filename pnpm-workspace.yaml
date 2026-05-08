@@ -1,3 +1,9 @@
 minimumReleaseAge: 10080 # 1週間
+minimumReleaseAgeExclude:
+  # astro@6.2.0で非推奨の1.3.0を使用している。astroのバージョンが将来上がったらこのoverridesは消す
+  - "@ungap/structured-clone@1.3.1"
 allowBuilds:
   "@actions/github-script": true
+overrides:
+  # astro@6.2.0で非推奨の1.3.0を使用している。astroのバージョンが将来上がったらこのoverridesは消す
+  "@ungap/structured-clone": "1.3.1"
