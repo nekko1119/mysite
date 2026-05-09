@@ -17,7 +17,11 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
       - name: Lint
         run: pnpm lint
       - name: Type check
         run: pnpm type-check
+      - name: test
+        run: pnpm test

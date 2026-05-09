@@ -25,7 +25,7 @@ export default defineConfig({
         ["json", { outputFile: "playwright-results.json" }],
         ["html", { open: "never" }],
       ]
-    : [["list"]],
+    : [["dot"], ["html", { open: "never" }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
