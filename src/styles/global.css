@@ -8,3 +8,13 @@
 p {
   @apply leading-7;
 }
+
+.themed-link {
+  @apply link link-primary;
+}
+
+@media (prefers-color-scheme: dark) {
+  .themed-link {
+    @apply link-accent;
+  }
+}
