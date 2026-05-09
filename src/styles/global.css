@@ -9,12 +9,12 @@ p {
   @apply leading-7;
 }
 
-.themed-link {
-  @apply link link-primary;
+.link-color {
+  @apply link-primary;
 }
 
 @media (prefers-color-scheme: dark) {
-  .themed-link {
+  .link-color {
     @apply link-accent;
   }
 }
