@@ -15,8 +15,9 @@
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
     "prepare": "husky",
     "type-check": "astro check",
-    "test": "playwright test",
-    "test:update": "playwright test --update-snapshots"
+    "test": "playwright test --grep-invert @vrt",
+    "test:vrt": "playwright test --grep @vrt",
+    "test:vrt:update": "playwright test --grep @vrt --update-snapshots"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.105",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@actions/github-script": "github:actions/github-script#v9.0.0",
     "@astrojs/check": "0.9.8",
+    "@axe-core/playwright": "4.11.3",
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.59.1",
     "@types/node": "25.6.0",
