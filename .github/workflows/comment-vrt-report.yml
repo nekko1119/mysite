@@ -20,12 +20,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Download playwright results
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
-        with:
-          run-id: ${{ github.event.workflow_run.id }}
-          name: playwright-results
-          path: ${{ github.workspace}}
       - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
@@ -40,6 +34,12 @@ jobs:
               run_id: runId,
             });
             console.log(JSON.stringify(result.data, null, 2));
+      - name: Download playwright results
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          name: playwright-results
+          path: ${{ github.workspace}}
       - name: Comment PR
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         env:
