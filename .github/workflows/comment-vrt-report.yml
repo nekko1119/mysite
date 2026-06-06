@@ -26,6 +26,20 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           name: playwright-results
           path: ${{ github.workspace}}
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          script: |
+            const runId = context.payload.workflow_run.id;
+
+            console.log("runId =", runId);
+            console.log("workflow =", context.payload.workflow_run.name);
+
+            const result = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+            console.log(JSON.stringify(result.data, null, 2));
       - name: Comment PR
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         env:
