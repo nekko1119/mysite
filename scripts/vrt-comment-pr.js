@@ -53,9 +53,9 @@ ${table}
   return text;
 }
 
-/** @param {import('@actions/github-script').AsyncFunctionArguments} args */
+/** @param {import('@actions/github-script').AsyncFunctionArguments & { runId: string; prNumber: number }} args */
 export default async (args) => {
-  const { github, core, context } = args;
+  const { github, core, context, runId, prNumber } = args;
   const markerComment = "<!-- playwright-vrt-comment -->";
   const { owner, repo } = context.repo;
 
@@ -70,12 +70,12 @@ export default async (args) => {
 
 ${text}
 
-[Artifact](https://github.com/${owner}/${repo}/actions/runs/${context.runId})
+[Artifact](https://github.com/${owner}/${repo}/actions/runs/${runId})
 
 ${markerComment}
 `;
 
-  const issueNumber = context.issue.number;
+  const issueNumber = prNumber;
 
   // listComments は最大30件の取得のため、コメントが多いPRではVRTコメントが取得できない可能性がある
   // その場合はページネーションAPIを使うこと
@@ -102,7 +102,7 @@ ${markerComment}
   } else {
     const createdComment = await github.rest.issues.createComment({
       ...context.repo,
-      issue_number: context.issue.number,
+      issue_number: prNumber,
       body,
     });
     core.info(`Created comment: ${createdComment.data.html_url}`);
