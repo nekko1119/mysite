@@ -70,4 +70,4 @@ jobs:
             const runId = context.payload.workflow_run.id;
             const prNumber = pr.number;
             const script = await import('${{ github.workspace }}/scripts/vrt-comment-pr.js');
-            await script.default({ github, core, context: patchedContext, runId, prNumber });
+            await script.default({ github, core, context, runId, prNumber });
