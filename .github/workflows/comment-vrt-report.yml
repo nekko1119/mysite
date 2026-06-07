@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      pull_requests: write
       contents: read
       actions: read
     steps:
@@ -20,35 +21,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        with:
-          script: |
-            const runId = context.payload.workflow_run.id;
-
-            console.log("runId =", runId);
-            console.log("workflow =", context.payload.workflow_run.name);
-
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: runId,
-            });
-            console.log(JSON.stringify(artifacts.data, null, 2));
-            const playwrightResultsArtifact = artifacts.data.artifacts.find(
-              (artifact) => artifact.name === "playwright-results"
-            );
-            if (!playwrightResultsArtifact) {
-              console.log('"playwright-results" was not found');
-              return;
-            }
-            console.log("playwright-results artifact=", playwrightResultsArtifact);
-            console.log("playwright-results artifact id=", playwrightResultsArtifact.id);
-            await github.rest.actions.downloadArtifact({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              artifact_id: playwrightResultsArtifact.id,
-              archive_format: "zip",
-            });
       - name: Download playwright results
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
