@@ -7,10 +7,8 @@ jobs:
   comment-vrt-report:
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      contents: read
-      actions: read
+    # debugで一時的に全部許可する。debugが終わったら戻す
+    permissions: write-all
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
       - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6

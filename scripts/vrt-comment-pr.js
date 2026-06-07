@@ -91,6 +91,24 @@ ${markerComment}
     (comment) =>
       comment.user?.type === "Bot" && comment.body?.includes(markerComment),
   );
+
+  // debug
+  console.log({
+    owner,
+    repo,
+    prNumber,
+    repoContext: context.repo,
+  });
+  // debug
+  const pulls = await github.rest.pulls.get({
+    owner,
+    repo,
+    pull_number: prNumber,
+  });
+  console.log(
+    JSON.stringify(pulls, null, 2)
+  );
+
   if (existingComment) {
     await github.rest.issues.updateComment({
       owner,
