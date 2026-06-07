@@ -67,10 +67,5 @@ jobs:
               core.info("workflow_run に紐づく PR が見つからないためコメントをスキップします");
               return;
             }
-            const patchedContext = {
-              ...context,
-              issue: { ...context.issue, number: pr.number },
-              runId: context.payload.workflow_run.id,
-            };
             const script = await import('${{ github.workspace }}/scripts/vrt-comment-pr.js');
-            await script.default({ github, core, context: patchedContext });
+            await script.default({ github, core, context });
