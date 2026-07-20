@@ -3,7 +3,7 @@
 import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
-import astroParser from "astro-eslint-parser";
+import * as astroParser from "astro-eslint-parser";
 import typescriptParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
@@ -18,6 +18,8 @@ export default defineConfig([
       ".vscode/",
       "dist/",
       "node_modules/",
+      "playwright-report/",
+      "test-results/",
       "public/",
       "scripts/",
     ],
