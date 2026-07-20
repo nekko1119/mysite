@@ -12,7 +12,7 @@ CopilotにPRレビューをしてもらっています。
 
 ## Development
 
-PRがmainにマージされると自動でデプロイされます。
+PR が main ブランチにマージされると自動でデプロイされます。
 
 Install deps
 
