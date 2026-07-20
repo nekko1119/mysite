@@ -1,6 +1,6 @@
 // @ts-check
 
-import { defineConfig } from "eslint/config";
+import { defineConfig, includeIgnoreFile } from "eslint/config";
 import js from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
 import * as astroParser from "astro-eslint-parser";
@@ -8,21 +8,14 @@ import typescriptParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
 import globals from "globals";
+import { fileURLToPath } from "node:url";
+
+const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default defineConfig([
+  includeIgnoreFile(gitignorePath, { gitignoreResolution: true }),
   {
-    ignores: [
-      ".astro/",
-      ".github/",
-      ".husky",
-      ".vscode/",
-      "dist/",
-      "node_modules/",
-      "playwright-report/",
-      "test-results/",
-      "public/",
-      "scripts/",
-    ],
+    ignores: [".github/", ".husky", ".vscode/", "public/", "scripts/"],
   },
   js.configs.recommended,
   eslintPluginAstro.configs.recommended,
