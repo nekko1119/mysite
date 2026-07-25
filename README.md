@@ -7,7 +7,7 @@
 Astro を使用しています。
 ディレクトリ構造は https://docs.astro.build/en/basics/project-structure/ に従っています。
 
-CI による lint / type-check / Playwright を使った VRT が動いています。Dependabot による依存関係の更新が動いています。
+CI による lint / type-check と、Playwright を使った VRT（Visual Regression Testing）が動いています。Dependabot による依存関係の更新が動いています。
 GitHub Copilot に PR レビューをしてもらっています。
 
 ## Development
