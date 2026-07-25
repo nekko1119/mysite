@@ -12,7 +12,7 @@ GitHub Copilot に PR レビューをしてもらっています。
 
 ## Development
 
-PR が main ブランチにマージされると自動でデプロイされます。
+main ブランチへの push（通常は PR マージ）で自動でデプロイされます。
 
 Install deps
 
