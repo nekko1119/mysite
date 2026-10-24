@@ -1,0 +1,54 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+    # Optional: Only run on specific file changes
+    # paths:
+    #   - "src/**/*.ts"
+    #   - "src/**/*.tsx"
+    #   - "src/**/*.js"
+    #   - "src/**/*.jsx"
+
+# 同一PRで短時間に連続pushされた場合、実行中の古いレビューを中止して最新の差分だけをレビューする
+concurrency:
+  group: claude-code-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  claude-review:
+    # draft PRはまだレビューする段階ではないため実行しない
+    # 作成者はリポジトリオーナーとdependabotに限定する
+    # (第三者に大量のPRを作成されてトークンが枯渇するのを防ぐため)
+    if: >-
+      github.event.pull_request.draft == false &&
+      (github.event.pull_request.user.login == github.repository_owner ||
+      github.event.pull_request.user.login == 'dependabot[bot]')
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
+          plugins: "code-review@claude-code-plugins"
+          prompt: |
+            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}${{ github.event.pull_request.user.login == 'dependabot[bot]' && ' --dependabot' || '' }}
+
+            レビュー方針は code-review-policy スキルに従うこと。
+          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment,WebFetch,WebSearch,Bash(gh release:*),Bash(gh api:*)"'
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
