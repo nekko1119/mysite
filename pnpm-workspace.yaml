@@ -1,5 +1,15 @@
 minimumReleaseAge: 10080 # 1週間
+savePrefix: ""
 allowBuilds:
   "@actions/github-script@https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3": true
+  esbuild: false
 overrides:
   "undici": "8.7.0"
+# pnpm 12はpackageManagerのピン留めを自前で解決し、その結果をpnpm-lock.yamlの
+# 1つ目のYAMLドキュメントとして書き出す。GitHubのdependency graphパーサーは
+# 1つ目しか読まないため依存0件と誤認し、Dependabotのセキュリティアラートが
+# 勝手にクローズされてしまう。ignoreにすると解決自体を行わず単一ドキュメントを保てる。
+# 抑止できるのはignoreのみで、download(既定) / error / warn はいずれも書き出す。
+# GitHubのパーサーが複数ドキュメントに対応したらこの設定は削除してよい。
+# https://github.com/pnpm/pnpm/issues/13805
+pmOnFail: ignore
