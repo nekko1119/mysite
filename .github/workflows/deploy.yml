@@ -19,6 +19,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@b7d53628f8b666036b0238aadb0b984a2a489f26 # v6
         with:
+          # withastro/actionはpackage.jsonのdevEnginesを読まず、未指定だとデフォルトのNode 24になるため明示する
           node-version: 26
           build-cmd: pnpm build
 

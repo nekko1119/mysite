@@ -32,6 +32,13 @@ Build
 pnpm build
 ```
 
+## Node.js のバージョン
+
+`package.json` の `devEngines.runtime` を正とし、CI の `actions/setup-node` は `node-version-file: package.json` でこれを参照しています。
+
+`.node-version` は fnm のために残しています。fnm が解決できるのは `.node-version` / `.nvmrc` / `engines.node` のみで `devEngines.runtime` には未対応のためです（`fnm use --help` の `--resolve-engines` を参照）。
+fnm が `devEngines` に対応したら `.node-version` は削除できます。
+
 ## バージョン更新
 
 1. ローカルブランチで `package.json` のバージョンを更新する
