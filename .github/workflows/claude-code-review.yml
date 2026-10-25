@@ -50,6 +50,9 @@ jobs:
             /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}${{ github.event.pull_request.user.login == 'dependabot[bot]' && ' --dependabot' || '' }}
 
             レビュー方針は code-review-policy スキルに従うこと。
+
+            `--dependabot` 指定時は、「automated PR である」「依存バージョンの更新だけで自明」
+            という理由でレビューを中止しないこと(クローズ済み・draftは引き続き中止する)。
           claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment,WebFetch,WebSearch,Bash(gh release:*),Bash(gh api:*)"'
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
