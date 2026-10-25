@@ -2,9 +2,13 @@ minimumReleaseAge: 10080 # 1週間
 savePrefix: ""
 allowBuilds:
   "@actions/github-script@https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3": true
-  esbuild: false
 overrides:
-  "undici": "8.7.0"
+  # @actions/github-script@9.0.0が@actions/core ^1.10.1を要求し、その先の
+  # @actions/http-client@2.xが脆弱性のあるundici 5.29.0を引いてくるため固定する。
+  # github-scriptが@actions/coreを2系以降に上げるまでこの経路は解消できない。
+  # 固定版が古くなると今度はそれ自身が脆弱性を抱えるので、
+  # 更新時はpnpm auditでundiciの検出が0件になることを確認すること。
+  "undici": "8.12.2"
 # pnpm 12はpackageManagerのピン留めを自前で解決し、その結果をpnpm-lock.yamlの
 # 1つ目のYAMLドキュメントとして書き出す。GitHubのdependency graphパーサーは
 # 1つ目しか読まないため依存0件と誤認し、Dependabotのセキュリティアラートが
